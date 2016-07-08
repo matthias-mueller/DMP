@@ -128,7 +128,7 @@ START: Nutzer befindet sich im Dateibrowser
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
 
-## Qualify-Aktion
+## Qualify
 
 Der Qualify-Prozess sorgt für eine Qualifizierung von Dateien und Gruppen vor der Publikation. Ein Assistent prüft
 a) das Vorhandensein notwendiger und optionaler ISO-Metadaten
@@ -156,4 +156,4 @@ START
 ENDE
 ```
 
-## Define-Schema-Aktion
+## Define-Schema
