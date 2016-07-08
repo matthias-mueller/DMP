@@ -9,7 +9,6 @@ Auf Ordnern sind folgende Aktionen erlaubt:
 - Delete
 - Edit Properties
 
-
 ## Dateien
 Dateien sind die primären Datenobjekte in der DMP. Genau wie in typischen Dateisystemen enthalten sie beliebige Projektdaten.
 
@@ -35,6 +34,14 @@ Auf Dateien innerhalb einer Gruppe sind folgende Aktionen erlaubt:
 Folgende Sondertypen von Gruppen werden unterschieden (aktuelle Iteration!):
 - Shapefiles
 - CSV-Dateien
+
+## Properties
+Properties sind Multi-Sets von Key-Value-Pairs, die Ordner, Dateien und Dateigruppen näher beschreiben. Properties können grundsätzlich mehrfach definiert werden (z.B. für Datensatzautoren, Keywords, ...) (Alternative: Wir erlauben Wertlisten als Values)
+
+Die Editieraktionen für Properties sind:
+- Anlegen
+- Ändern
+- Löschen
 
 # Aktionen in der DMP
 
