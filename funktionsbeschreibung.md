@@ -172,24 +172,24 @@ ENDE: Properties speichern;
 
 ##### Publication-Properties
 
-| Name | Definition | Datentyp / Wert | Multiplizität / Verwendung |
-|---|---|---|---|
-| Title | Titel des Datensatzes  | Text ohne Zeilenumbruch | [1], PFLICHT |
-| Abstract | Kurzbeschreibung des Datensatz | Text mit Zeilenumbruch | [0..1], EMPFOHLEN |
-| Date | Datum der Erzeugung, Veröffentlichung oder Aktualisierung | ISO Date | [1], PFLICHT |
-| Author | Author des Datensatzes | Text ohne Zeilenumbruch | [0..1], EMPFOHLEN |
-| Organisation | Zuständige Organisation  | Text ohne Zeilenumbruch | [1], PFLICHT |
-| Email | Kontakt-Email | Mailadresse [REGEX](http://emailregex.com/) | [1], PFLICHT |
-| Phone | Kontakt-Telefon | [REGEX](https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s03.html) | [0..1], EMPFOHLEN |
-| Spatial extent | Räumliche Ausdehnung, BBOX in WGS84 lat/lon | BBOX String, Bsp: (50.7,7.1,50.8,7.25) | [0..1], EMPFOHLEN sofern vorhanden |
-| Temporal extent | Zeitliche Ausdehnung, Start / Ende | Anfangs- und Enddatum (ISO-String) | [0..1], EMPFOHLEN sofern vorhanden |
-| Sprache | Sprache d. Datensatzes (Attribute etc.) | ISO Language Code | [0..1], OPTIONAL |
-| Keyword | Schlüsselwort für den Datensatz | Text ohne Zeilenumbruch | [0..*], EMPFOHLEN |
-| Theme | Thematik d. Datensatzes | Text ohne Zeilenumbruch | [0..*], EMPFOHLEN |
-| License | Nutzungs- und Weitergabelizenz | Text ohne Zeilenumbruch ODER Creative Commons | [0..1], EMPFOHLEN |
-| Spatial Resolution | Räumliche Auflösung der Daten | Meter oder Grad | [0..1], EMPFOHLEN sofern vorhanden |
-| Temporal Resolution | Zeitliche Auflösung der Daten | ISO-Intervall | [0..1], EMPFOHLEN sofern vorhanden |
-| Source | Herkunft des Datensatz | Text mit Zeilenumbruch | [0..1], OPTIONAL |
+| Name | Definition | Datentyp / Wert | Kardinalität | Verwendung |
+|---|---|---|---|---|
+| Title | Titel des Datensatzes  | Text ohne Zeilenumbruch | [1] | PFLICHT |
+| Abstract | Kurzbeschreibung des Datensatz | Text mit Zeilenumbruch | [0..1] | EMPFOHLEN |
+| Date | Datum der Erzeugung, Veröffentlichung oder Aktualisierung | ISO Date | [1] | PFLICHT |
+| Author | Author des Datensatzes | Text ohne Zeilenumbruch | [0..1] | EMPFOHLEN |
+| Organisation | Zuständige Organisation  | Text ohne Zeilenumbruch | [1] | PFLICHT |
+| Email | Kontakt-Email | Mailadresse [REGEX](http://emailregex.com/) | [1] | PFLICHT |
+| Phone | Kontakt-Telefon | [REGEX](https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s03.html) | [0..1] | EMPFOHLEN |
+| Spatial extent | Räumliche Ausdehnung, BBOX in WGS84 lat/lon | BBOX String, Bsp: (50.7,7.1,50.8,7.25) | [0..1] | EMPFOHLEN sofern vorhanden |
+| Temporal extent | Zeitliche Ausdehnung, Start / Ende | Anfangs- und Enddatum (ISO-String) | [0..1] | EMPFOHLEN sofern vorhanden |
+| Sprache | Sprache d. Datensatzes (Attribute etc.) | ISO Language Code | [0..1] | OPTIONAL |
+| Keyword | Schlüsselwort für den Datensatz | Text ohne Zeilenumbruch | [0..*] | EMPFOHLEN |
+| Theme | Thematik d. Datensatzes | Text ohne Zeilenumbruch | [0..*] | EMPFOHLEN |
+| License | Nutzungs- und Weitergabelizenz | Text ohne Zeilenumbruch ODER Creative Commons | [0..1] | EMPFOHLEN |
+| Spatial Resolution | Räumliche Auflösung der Daten | Meter oder Grad | [0..1] | EMPFOHLEN sofern vorhanden |
+| Temporal Resolution | Zeitliche Auflösung der Daten | ISO-Intervall | [0..1] | EMPFOHLEN sofern vorhanden |
+| Source | Herkunft des Datensatz | Text mit Zeilenumbruch | [0..1] | OPTIONAL |
 
 
 ## Define-Schema
