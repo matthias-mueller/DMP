@@ -148,7 +148,7 @@ START: Nutzer befindet sich im Dateibrowser
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
 
-#####  Qualify-Prozess (Datei|Gruppe, Properties) - als Teilprozess der Publikation
+#####  Qualify-Prozess (Datei|Gruppe, Properties) - als Parametrisierter Teilprozess
 ```
 START
 1. 
