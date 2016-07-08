@@ -165,8 +165,8 @@ START
 
 ENDE: Properties speichern;
       Rückgabewert:
-        OK (alles grün)
-        WARN (ein oder mehrere GELB)
+        OK (kein GELB oder ROT)
+        WARN (ein oder mehrere GELB, keines ROT)
         ERROR (ein oder mehrere ROT)
 ```
 
