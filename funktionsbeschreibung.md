@@ -149,7 +149,7 @@ START: Nutzer befindet sich im Dateibrowser
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
 
-#####  Qualify-Prozess (Datei|Gruppe, Properties) - als parametrisierbarer Teilprozess
+##### Qualify-Prozess (Datei|Gruppe, Properties) - als parametrisierbarer Teilprozess
 ```
 START
 1. Laden der Publication-Properties
@@ -169,6 +169,22 @@ ENDE: Properties speichern;
         WARN (ein oder mehrere GELB, keines ROT)
         ERROR (ein oder mehrere ROT)
 ```
+
+##### Publication-Properties
+
+| Name | Definition | Datentyp / Wert | Multiplizität / Verwendung |
+|---|---|---|---|
+| Title | Titel des Datensatzes  | Text ohne Zeilenumbruch | [1], PFLICHT |
+| Abstract | Kurzbeschreibung des Datensatz | Text mit Zeilenumbruch | [0..1], EMPFOHLEN |
+| Date | Datum der Erzeugung, Veröffentlichung oder Aktualisierung | ISO Date | [1], PFLICHT |
+| Author | Author des Datensatzes | Text ohne Zeilenumbruch | [0..1], EMPFOHLEN |
+| Organisation | Zuständige Organisation  | Text ohne Zeilenumbruch | [1], PFLICHT |
+| Email | Kontakt-Email | Mailadresse [REGEX](http://emailregex.com/) | [1], PFLICHT |
+| Phone | Organisation oder   | [REGEX](https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s03.html) | [0..1], EMPFOHLEN |
+| Spatial extent | Räumliche Ausdehnung, BBOX in WGS84 lat/lon | BBOX String, Bsp: (50.7,7.1,50.8,7.25) | [0..1], EMPFOHLEN sofern vorhanden |
+| Temporal extent | Zeitliche Ausdehnung, Start / Ende | Anfangs- und Enddatum (ISO-String) | [0..1], EMPFOHLEN sofern vorhanden |
+
+
 
 ## Define-Schema
 Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien.
