@@ -7,6 +7,7 @@ Auf Ordnern sind folgende Aktionen erlaubt:
 - Rename
 - Move
 - Delete
+- Edit Properties
 
 
 ## Dateien
@@ -148,12 +149,22 @@ START: Nutzer befindet sich im Dateibrowser
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
 
-#####  Qualify-Prozess (Datei|Gruppe, Properties) - als Parametrisierter Teilprozess
+#####  Qualify-Prozess (Datei|Gruppe, Properties) - als parametrisierbarer Teilprozess
 ```
 START
-1. 
+1. Laden der Publication-Properties
+2. Vorhandene Property-Elemente um fehlende Publication Properties ergänzen
+3. Fehlende Property-Werte aus Datensatz ableiten [Algorithmik kann sukzessive verfeinert werden]
+4. Validierung der Property-Werte:
+   - Korrekter Wert: Property GRÜN markieren
+   - Falscher Wert: Property ROT markieren
+   - Fehlender Pflichwerte: Property ROT markieren
+   - Fehlender empfohlener Werte: Property GELB markieren
+   - Sonstiger fehlender Wert: Property GRAU darstellen
+5. Nutzer ergänzt Eingaben
 
-ENDE
+ENDE: Properties speichern; Rückgabewert OK/WARN/ERROR
 ```
 
 ## Define-Schema
+Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien.
