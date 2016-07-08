@@ -163,7 +163,11 @@ START
    - Sonstiger fehlender Wert: Property GRAU darstellen
 5. Nutzer ergänzt Eingaben
 
-ENDE: Properties speichern; Rückgabewert OK/WARN/ERROR
+ENDE: Properties speichern;
+      Rückgabewert:
+        OK (alles grün)
+        WARN (ein oder mehrere GELB)
+        ERROR (ein oder mehrere ROT)
 ```
 
 ## Define-Schema
