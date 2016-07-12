@@ -4,7 +4,8 @@
 Ordner sind Strukturierungselemente für Dateien.
 
 Auf Ordnern sind folgende Aktionen erlaubt:
-- Rename
+
+-  Rename
 - Move
 - Delete
 - Edit Properties
@@ -13,25 +14,30 @@ Auf Ordnern sind folgende Aktionen erlaubt:
 Dateien sind die primären Datenobjekte in der DMP. Genau wie in typischen Dateisystemen enthalten sie beliebige Projektdaten.
 
 Auf Dateien sind folgende Aktionen erlaubt:
-- [alle Ordneroperationen]
-- Group
+
+-  [alle Ordneroperationen]
+-  Group
 - Publish
 - Qualify
 - Define Schema (für CSV-Dateien)
 
 ## Dateigruppen
-Dateigruppen fassen innerhalb von Ordnern mehrere Dateien in einer Gruppe zusammen. Gruppennamen werden in der DMP auf einer Ebene mit Dateien visualisiert. Unterhalb der Gruppenebene erscheinen die einzelnen Dateien eingerückt und in grauem Font
+Dateigruppen fassen innerhalb von Ordnern mehrere Dateien in einer Gruppe zusammen. Gruppennamen werden in der DMP auf einer Ebene mit Dateien visualisiert. Unterhalb der Gruppenebene erscheinen die einzelnen Dateien eingerückt und in grauem Font.
+**Zur Diskussion: Eine Datei kann nicht mehreren Gruppen zugeordnet werden. Sollte dies benötigt werden, so ist eine Kopie das Datenobjekts anzulegen.**
 
 Auf Gruppen sind folgende Aktionen erlaubt:
+
 - [alle Dateioperationen]
 - Define Schema (für Gruppen von CSV-Dateien)
 - Ungroup -> Gruppenverband auflösen
 
 Auf Dateien innerhalb einer Gruppe sind folgende Aktionen erlaubt:
+
 - [alle Ordneroperationen]
 - Remove from Group
 
 Folgende Sondertypen von Gruppen werden unterschieden (aktuelle Iteration!):
+
 - Shapefiles
 - CSV-Dateien
 
@@ -39,6 +45,7 @@ Folgende Sondertypen von Gruppen werden unterschieden (aktuelle Iteration!):
 Properties sind Multi-Sets von Key-Value-Pairs, die Ordner, Dateien und Dateigruppen näher beschreiben. Properties können grundsätzlich mehrfach definiert werden (z.B. für Datensatzautoren, Keywords, ...) (Alternative: Wir erlauben Wertlisten als Values)
 
 Die Editieraktionen für Properties sind:
+
 - Anlegen
 - Ändern
 - Löschen
@@ -51,7 +58,7 @@ Die Group-Aktion fasst mehrere Dateien zu einer Gruppe zusammen.
 ```
 START: Nutzer befindet sich im Dateibrowser
 
-1. Nutzer markiert mehrere bisher ungruppierte Dateien
+1. Nutzer markiert mehrere bisher ungruppierte Dateien (durch Shift-Klick im einfachsten Fall)
 2. [Group-Symbol erscheint in der Ansicht]
 3. Nutzer klickt Gruppierungssymbol
 4. DMP fasst Dateien zu einer Gruppe zusammen
@@ -66,9 +73,10 @@ ENDE: Dateien werden in der Ansicht als Gruppe dargestellt
 
 ## Add-to-Group
 Die Add-to-Group-Aktion fügt
+
 a) Dateien zu einer bestehenden Gruppe hinzu
 b) Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen (alte Gruppenverbände werden aufgelöst)
-c) Einzeldateien und Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen
+c) Einzeldateien und Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen **(Diskussion: bleibt alte Gruppe bestehen oder wird diese  gelöscht?)**
 
 ```
 START: Nutzer befindet sich im Dateibrowser
@@ -85,6 +93,7 @@ START: Nutzer befindet sich im Dateibrowser
    - Merge Regeln müssen noch mit Anwendern überprüft werden, für die erste Iteration gilt:
      - Non-Null-Elemente schlagen Null-Elemente
      - neue Non-Null-Elemente ersetzen alte Non-Null-Elemente (upsert)
+     - **Non-Null-Gruppen-Elemente schlagen Non-Null-Dateien-Elemente**
    - Einzeldateien behalten ihre ursprünglichen Properties
 
 ENDE: Dateien werden in der Ansicht als eine gemeinsame Gruppe dargestellt
@@ -117,7 +126,7 @@ START: Nutzer befindet sich im Dateibrowser
 4. DMP löst das Dateiobjekte aus der Gruppe
    [Datei behält nur ihre ursprünglichen Properties]
 
-ENDE: Datei ist aus der Gruppe gelöst und erscheint wieder eigenständig
+ENDE: Datei ist aus der Gruppe gelöst und erscheint wieder eigenständig **parallel zum Gruppenelement**
 ```
 
 ## Publish
@@ -143,6 +152,7 @@ a) das Vorhandensein notwendiger und optionaler ISO-Metadaten
 b) das Vorhandensein eines Schema-Descriptors für CSV-Dateien und Gruppen von CSV-Dateien
 
 ##### Einzelaktion - via GUI
+
 ```
 START: Nutzer befindet sich im Dateibrowser
 
@@ -150,13 +160,15 @@ START: Nutzer befindet sich im Dateibrowser
 2. [Qualify-Symbol erscheint in der Ansicht]
 3. Nutzer klickt Qualify-Symbol
    - Bei CSV-Dateien und -gruppen wird die Existenz eines Schema-Descriptors geprüft
-     - Falls dieser fehlt: Abbruch mit Hinweis. [alternativ: Start des Qualify-Prozesses]
+     - Falls dieser fehlt: Abbruch mit Hinweis. [alternativ: Start des Qualify-Prozesses] 
    - DMP startet den Qualify-Prozess
 
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
+**Alternative: Datei kann hochgeladen werden unter Hinweis dass keine Veröffentlichung in DataServices möglich ist, denn es kann sich auch einfach um eine CSV ohne Geobezug handeln**
 
 ##### Qualify-Prozess (Datei|Gruppe, Properties) - als parametrisierbarer Teilprozess
+
 ```
 START
 1. Laden der Publication-Properties
@@ -200,4 +212,4 @@ ENDE: Properties speichern;
 
 
 ## Define-Schema
-Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien.
+**Die CSV-Datei/Gruppe wird im CKAN veröffentlicht. Die darbei erzeugten IDs werden für den nachfolgenden Schritt genutzt.** Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien. **Der Schema-Descriptor wird im CKAN veröffentlicht****
