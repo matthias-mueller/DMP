@@ -5,7 +5,7 @@ Ordner sind Strukturierungselemente für Dateien.
 
 Auf Ordnern sind folgende Aktionen erlaubt:
 
--  Rename
+- Rename
 - Move
 - Delete
 - Edit Properties
@@ -53,6 +53,9 @@ Die Editieraktionen für Properties sind:
 
 # Aktionen in der DMP
 
+## Delete
+Die Delete-Aktion entfernt Objekte aus der DMP. Löschvorgänge kaskadieren in den CKAN, d.h. publizierte Datensätze werden mit Hilfe des Publishing-Logs auch aus dem CKAN gelöscht. Nach Löschung beider Objekte wird auch der entsprechende Eintrag aus dem Publishing-Log entfernt.
+
 ## Group
 Die Group-Aktion fasst mehrere Dateien zu einer Gruppe zusammen.
 
@@ -94,7 +97,7 @@ START: Nutzer befindet sich im Dateibrowser
    - Merge Regeln müssen noch mit Anwendern überprüft werden, für die erste Iteration gilt:
      - Non-Null-Elemente schlagen Null-Elemente
      - neue Non-Null-Elemente ersetzen alte Non-Null-Elemente (upsert)
-     - **Non-Null-Gruppen-Elemente schlagen Non-Null-Dateien-Elemente**
+     - Non-Null-Elemente der Gruppen schlagen Non-Null-Elemente der Dateien
    - Einzeldateien behalten ihre ursprünglichen Properties
 
 ENDE: Dateien werden in der Ansicht als eine gemeinsame Gruppe dargestellt
@@ -152,9 +155,21 @@ START: Nutzer befindet sich im Dateibrowser
           - Speicherung des Publikationsvorgangs im Publishing-Log
         - N/A: (kein Schema Descriptor vorhanden)
           - es werden nur die Daten (unter Zuhilfenahme der CKAN-IDs aus dem Publishing-Log) und die ISO-Metadaten aktualisiert
-
+   4.3. Das Datum der letzten Veröffentlichung wird im Publishing-Log aktualisiert
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
+
+##### Publishing-Log
+Im Publishing-Log werden zu jedem Publikationsobjekt folgende Eigenschaften gespeichert:
+
+| Name | Definition | Datentyp / Wert | Kardinalität | Verwendung |
+|---|---|---|---|---|
+| ObjectID | ID des publizierten Objekts (Datei oder Gruppe)  | DMP-ID | [1] | PFLICHT |
+| ID-LUT | Lookup Table DMP-IDs -> CKAN-IDs  | Map<String,String> | [1] | PFLICHT |
+| Date | Datum der letzten Publikation | ISO Date | [1] | PFLICHT |
+| CKAN-SchemaDescriptor | Angepasster Schema Descriptor f.d. CKAN (mit CKAN-IDs) | ISO Date | [0..1] | PFLICHT wenn vorhanden |
+
+Objekte im Publishing-Log leben so lange, wie die Objekte in der DMP leben. 
 
 ## Qualify
 
