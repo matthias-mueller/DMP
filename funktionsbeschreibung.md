@@ -136,6 +136,8 @@ ENDE: Datei ist aus der Gruppe gelöst und erscheint wieder eigenständig **para
 ## Publish
 Die Publish-Aktion veröffentlicht Dateien oder Dateigruppen im CKAN. Um später publizierte Datensätze im CKAN aktualisieren zu können, muss die DMP ein Publishing-Log führen.
 
+Verfügt das zu publizierende Objekt über einen Schema-Descriptor, so wird im Rahmen des Publikationsvorgangs zusätzlich ein angepasster Schema-Descriptor generiert, der die internen DMP-IDs gegen CKAN-IDs substituiert. Dieser zusätzliche Descriptor wird nur im Publishing-Log gespeichert.
+
 ```
 START: Nutzer befindet sich im Dateibrowser
 
@@ -240,4 +242,4 @@ ENDE: Properties speichern;
 
 
 ## Define-Schema
-Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien.
+Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien. Alle Dateireferenzen werden zunächst über DMP-IDs der jeweiligen Objekte abgebildet. Die "Übersetzung" in CKAN-IDs erfolgt erst im Rahmen des Publikationsvorgangs.
