@@ -23,7 +23,8 @@ Auf Dateien sind folgende Aktionen erlaubt:
 
 ## Dateigruppen
 Dateigruppen fassen innerhalb von Ordnern mehrere Dateien in einer Gruppe zusammen. Gruppennamen werden in der DMP auf einer Ebene mit Dateien visualisiert. Unterhalb der Gruppenebene erscheinen die einzelnen Dateien eingerückt und in grauem Font.
-**Zur Diskussion: Eine Datei kann nicht mehreren Gruppen zugeordnet werden. Sollte dies benötigt werden, so ist eine Kopie das Datenobjekts anzulegen.**
+
+NB: Eine Datei kann nicht mehreren Gruppen zugeordnet werden. Sollte dies benötigt werden, so ist eine Kopie das Datenobjekts anzulegen.
 
 Auf Gruppen sind folgende Aktionen erlaubt:
 
@@ -76,7 +77,7 @@ Die Add-to-Group-Aktion fügt
 
 a) Dateien zu einer bestehenden Gruppe hinzu
 b) Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen (alte Gruppenverbände werden aufgelöst)
-c) Einzeldateien und Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen **(Diskussion: bleibt alte Gruppe bestehen oder wird diese  gelöscht?)**
+c) Einzeldateien und Dateien aus mehreren Gruppen in einer neuen Gruppe zusammen (alte Gruppenverbände werden aufgelöst und ein neuer erzeugt)
 
 ```
 START: Nutzer befindet sich im Dateibrowser
@@ -130,7 +131,7 @@ ENDE: Datei ist aus der Gruppe gelöst und erscheint wieder eigenständig **para
 ```
 
 ## Publish
-Die Publish-Aktion veröffentlicht Dateien oder Dateigruppen im CKAN
+Die Publish-Aktion veröffentlicht Dateien oder Dateigruppen im CKAN. Um später publizierte Datensätze im CKAN aktualisieren zu können, muss die DMP ein Publishing-Log führen.
 
 ```
 START: Nutzer befindet sich im Dateibrowser
@@ -139,8 +140,18 @@ START: Nutzer befindet sich im Dateibrowser
 2. [Publish-Symbol erscheint in der Ansicht]
 3. Nutzer klickt Publish-Symbol
 4. DMP startet Publish-Prozess
-   - die DMP prüft intern, ob das zu publizierende Objekt korrekt qualifiziert ist
-     - es erscheint eine Warnung [ggf. Fehlermeldung] bei mangelhafter / ungenügender Qualifizierung
+   4.1. Die DMP prüft intern, ob das zu publizierende Objekt korrekt qualifiziert ist
+        - es erscheint eine Warnung [ggf. Fehlermeldung] bei mangelhafter / ungenügender Qualifizierung
+   4.2. Die DMP prüft, ob das zu publizierende Objekt bereits publiziert wurde
+        - JA: Hat sich der Schema Descriptor verändert?
+          - JA: die alten Ressourcen werden aus dem CKAN gelöscht und es wird ein neuer Datensatz im CKAN publiziert (s. nächster Punkt)
+          - NEIN: es werden nur die Daten (unter Zuhilfenahme der CKAN-IDs aus dem Publishing-Log) und die ISO-Metadaten aktualisiert
+        - NEIN: Es wird ein neuer Datensatz im CKAN publiziert
+          - Anpassung des Schema Descriptors: Austausch der DMP-IDs durch CKAN-IDs
+          - Übertragung von Daten, ISO-Metadaten und angepasstem Schema Descriptor
+          - Speicherung des Publikationsvorgangs im Publishing-Log
+        - N/A: (kein Schema Descriptor vorhanden)
+          - es werden nur die Daten (unter Zuhilfenahme der CKAN-IDs aus dem Publishing-Log) und die ISO-Metadaten aktualisiert
 
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
@@ -151,6 +162,8 @@ Der Qualify-Prozess sorgt für eine Qualifizierung von Dateien und Gruppen vor d
 a) das Vorhandensein notwendiger und optionaler ISO-Metadaten
 b) das Vorhandensein eines Schema-Descriptors für CSV-Dateien und Gruppen von CSV-Dateien
 
+NB: Für nicht-georeferenzierte CSV-Dateien bzw. CSV-Dateien ohne Schema Descriptor sollte trotzdem eine Veröffentlichung möglich sein. In diesem Fall erfolgt die Publikation ohne Schema Descriptor und die Daten erscheinen nicht in SOS/REST-API.
+
 ##### Einzelaktion - via GUI
 
 ```
@@ -160,12 +173,12 @@ START: Nutzer befindet sich im Dateibrowser
 2. [Qualify-Symbol erscheint in der Ansicht]
 3. Nutzer klickt Qualify-Symbol
    - Bei CSV-Dateien und -gruppen wird die Existenz eines Schema-Descriptors geprüft
-     - Falls dieser fehlt: Abbruch mit Hinweis. [alternativ: Start des Qualify-Prozesses] 
+     - Falls dieser fehlt:
+       -  Abbruch | Qualify | Warnung übergehen 
    - DMP startet den Qualify-Prozess
 
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
-**Alternative: Datei kann hochgeladen werden unter Hinweis dass keine Veröffentlichung in DataServices möglich ist, denn es kann sich auch einfach um eine CSV ohne Geobezug handeln**
 
 ##### Qualify-Prozess (Datei|Gruppe, Properties) - als parametrisierbarer Teilprozess
 
@@ -212,4 +225,4 @@ ENDE: Properties speichern;
 
 
 ## Define-Schema
-**Die CSV-Datei/Gruppe wird im CKAN veröffentlicht. Die darbei erzeugten IDs werden für den nachfolgenden Schritt genutzt.** Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien. **Der Schema-Descriptor wird im CKAN veröffentlicht****
+Die Define-Schema-Aktion erzeugt einen Schema-Descriptor für CSV-Dateien und Gruppen von CSV-Dateien.
