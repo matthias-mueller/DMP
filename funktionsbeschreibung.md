@@ -165,9 +165,9 @@ Im Publishing-Log werden zu jedem Publikationsobjekt folgende Eigenschaften gesp
 | Name | Definition | Datentyp / Wert | Kardinalität | Verwendung |
 |---|---|---|---|---|
 | ObjectID | ID des publizierten Objekts (Datei oder Gruppe)  | DMP-ID | [1] | PFLICHT |
-| ID-LUT | Lookup Table DMP-IDs -> CKAN-IDs  | Map<String,String> | [1] | PFLICHT |
+| ID-LUT | Lookup Table DMP-IDs -> CKAN-IDs  | Map(String,String) | [1] | PFLICHT |
 | Date | Datum der letzten Publikation | ISO Date | [1] | PFLICHT |
-| CKAN-SchemaDescriptor | Angepasster Schema Descriptor f.d. CKAN (mit CKAN-IDs) | ISO Date | [0..1] | PFLICHT wenn vorhanden |
+| CKAN-SchemaDescriptor | Angepasster Schema Descriptor f.d. CKAN (mit CKAN-IDs) | SchemaDescriptor | [0..1] | PFLICHT wenn vorhanden |
 
 Objekte im Publishing-Log leben so lange, wie die Objekte in der DMP leben. 
 
