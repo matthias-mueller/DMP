@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "schema_descriptor_version": {
+      "type": "number",
+      "default": 0.3
+    },
+    "resource_type": {
+      "type": "string",
+      "default": "csv-observations-collection"
+    },
+    "members": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "resource_name": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "encoding": {
+              "type": "string",
+              "default": "UTF-8"
+            },
+            "crs": {
+              "type": "string",
+              "default": "EPSG:4326"
+            },
+            "resource_type": {
+              "type": "string",
+              "enum": [
+                "observed_geometries",
+                "observations",
+                "observations_with_geometry"
+              ]
+            },
+            "header_rows": {
+              "type": "string",
+              "default": "1"
+            },
+            "fields": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "field_id": {
+                      "type": "string"
+                    },
+                    "short_name": {
+                      "type": "string"
+                    },
+                    "long_name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "field_type": {
+                      "type": "DataTypeCode",
+                      "enum": [
+                        "Boolean",
+                        "Integer",
+                        "Float",
+                        "Decimal",
+                        "Date",
+                        "String",
+                        "Geometry"
+                      ]
+                    },
+                    "field_role": {
+                      "type": "FieldRoleCode",
+                      "enum": [
+                        "latitude",
+                        "longitude",
+                        "height",
+                        "timestamp",
+                        "valid_time_start",
+                        "valid_time_end"
+                      ]
+                    },
+                    "date_format": {
+                      "type": "string",
+                      "default": "YYYY-MM-DDThh:mm:ssZ"
+                    },
+                    "time_zone": {
+                      "type": "string",
+                      "default":"GMT"
+                    },
+                    "phenomenon": {
+                      "type": "string"
+                    },
+                    "no_data": {
+                      "type": "string"
+                    },
+                    "uom": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "field_id",
+                    "field_type"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "resource_name",
+            "resource_type",
+            "fields"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_descriptor_version",
+    "resource_type",
+    "members"
+  ]
+}
