@@ -34,7 +34,7 @@ Auf Gruppen sind folgende Aktionen erlaubt:
 
 Auf Dateien innerhalb einer Gruppe sind folgende Aktionen erlaubt:
 
-- [alle Ordneroperationen]
+- [alle Ordneroperationen außer Move-Operation]
 - Remove from Group
 
 Folgende Sondertypen von Gruppen werden unterschieden (aktuelle Iteration!):
@@ -114,6 +114,9 @@ START: Nutzer befindet sich im Dateibrowser
 3. Nutzer klickt Ungroup-Symbol
 4. DMP löst alle Dateiobjekte aus der Gruppe
    [Dateien behalten nur ihre ursprünglichen Properties]
+5. Wurde die Gruppe bereits veröffentlicht?
+   - JA: entferne Gruppe ebenso aus CKAN
+   - NEIN: goto ENDE
 
 ENDE: Alle Dateien sind aus der Gruppe gelöst und erscheinen wieder eigenständig. Das Gruppenelement existiert nicht mehr.
 ```
@@ -157,7 +160,9 @@ START: Nutzer befindet sich im Dateibrowser
           - Speicherung des Publikationsvorgangs im Publishing-Log
         - N/A: (kein Schema Descriptor vorhanden)
           - es werden nur die Daten (unter Zuhilfenahme der CKAN-IDs aus dem Publishing-Log) und die ISO-Metadaten aktualisiert
-   4.3. Das Datum der letzten Veröffentlichung wird im Publishing-Log aktualisiert
+   4.3. Das Datum der letzten/aktuellsten Veröffentlichung wird im Publishing-Log aktualisiert
+        - Datum und Version der letzten Veröffentlichung werden in der Detailansicht des Objektes hinterlegt  
+
 ENDE: Publish-Prozess ist beendet, normale Dateibrowser-Ansicht wird wieder hergestellt
 ```
 
